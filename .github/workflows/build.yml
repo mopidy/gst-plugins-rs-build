@@ -24,7 +24,7 @@ jobs:
   # This job must run on the runner because hashFiles() operates on the runner
   # by design, not inside the defined container (actions/runner#837).
   bust-cache:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     outputs:
       container_version: ${{ steps.container.outputs.version }}
     steps:
@@ -46,7 +46,7 @@ jobs:
       fail-fast: false
       matrix:
         arch: [amd64, arm64, armhf, riscv64]
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     container: ghcr.io/mopidy/gst-plugins-rs-build:latest-${{ matrix.arch }}
     needs: bust-cache
     name: ${{ inputs.gst_plugin }} / ${{ inputs.gst_version }} / ${{ matrix.arch }}
